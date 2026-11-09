@@ -33,16 +33,6 @@ async function handle({ op, group, game, level, seed, action }) {
   if (op === "solve") {
     await handle({ op: "start", group, game, level, seed });
     if (group === "forge") return forge(game.solver, game.solve_limits);
-    if (game.alias === "wa30") {
-      const response = await fetch(new URL("./wa30-solutions.json", import.meta.url));
-      if (response.ok) {
-        const { levels } = await response.json();
-        const plan = levels[level];
-        if (plan && session.run({ op: "verify_plan", plan })) {
-          return { solved: true, plan: plan.map(id => ({ id })), source: "precomputed" };
-        }
-      }
-    }
     const result = session.run({ op });
     return { ...result, plan: result.plan.map(token => {
       const click = /^ACTION6\((-?\d+),(-?\d+)\)$/.exec(token);

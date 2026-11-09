@@ -219,7 +219,7 @@ function solve() {
     if (error) status.textContent = error;
     else if (result.solved) {
       showPlan(result.plan);
-      status.textContent = `${result.plan.length} ходов${result.source === "precomputed" ? " · готовый план" : ""}`;
+      status.textContent = `Ходов в плане: ${result.plan.length}`;
     } else {
       status.textContent = "Решение не найдено за отведённый поиск";
       status.title = result.reason ?? "";
