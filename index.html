@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ARC Player</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./player.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <h1>ARC Player</h1>
+  </header>
+  <main class="layout">
+    <section class="catalog" aria-label="Каталог игр">
+      <div class="tabs" aria-label="Разделы каталога">
+        <button type="button" data-group="forge" aria-pressed="true">Game Forge</button>
+        <button type="button" data-group="arc" aria-pressed="false">ARC-AGI-3</button>
+      </div>
+      <label class="search">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="query" type="search" placeholder="Поиск игр" aria-label="Поиск игр">
+      </label>
+      <ul id="games" class="games" aria-label="Игры"></ul>
+    </section>
+    <section class="play" aria-label="Игровое поле">
+      <div class="game-header">
+        <div class="game-heading">
+          <p id="collection" class="collection">Game Forge</p>
+          <h2 id="title">ARC Player</h2>
+        </div>
+        <form id="options" class="options">
+          <label>Уровень <input id="level" type="number" min="1" value="1" required></label>
+          <label id="seed-field">Сид <input id="seed" type="number" min="0" max="9007199254740991" value="0" required></label>
+          <button id="start" class="primary" type="submit" disabled>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"/></svg>
+            Играть
+          </button>
+        </form>
+      </div>
+      <div class="board">
+        <canvas id="frame" width="64" height="64" aria-label="Игровой кадр" tabindex="0"></canvas>
+      </div>
+      <div class="game-footer">
+        <div id="status" role="status" aria-live="polite">Загрузка каталога…</div>
+        <div class="controls" aria-label="Управление игрой">
+          <button data-action="ACTION3" title="Влево" aria-label="Влево" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M5 12h14"/></svg></button>
+          <button data-action="ACTION1" title="Вверх" aria-label="Вверх" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 5v14"/></svg></button>
+          <button data-action="ACTION2" title="Вниз" aria-label="Вниз" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 7 7 7-7m-7 7V5"/></svg></button>
+          <button data-action="ACTION4" title="Вправо" aria-label="Вправо" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 5 7 7-7 7m7-7H5"/></svg></button>
+          <button data-action="ACTION5" title="Действие (Space)" aria-label="Действие (Space)" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9v6h16V9"/></svg></button>
+          <button data-action="ACTION7" title="Отменить ход" aria-label="Отменить ход" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 14-5-5 5-5M4 9h10a5 5 0 0 1 0 10h-2"/></svg></button>
+          <button id="reset" title="Начать уровень заново" aria-label="Начать уровень заново" disabled><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 1 3 6.7M3 5v7h7"/></svg></button>
+          <button id="next" class="primary" hidden>Дальше <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 5 7 7-7 7m7-7H5"/></svg></button>
+        </div>
+      </div>
+      <section class="solution" aria-label="Решение">
+        <div class="solution-bar">
+          <button id="solve" type="button" disabled>Найти решение</button>
+          <button id="replay" class="primary" type="button" disabled>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"/></svg>
+            <span id="replay-label">Воспроизвести</span>
+          </button>
+          <span id="solution-status" role="status" aria-live="polite"></span>
+        </div>
+        <ol id="plan" class="plan" aria-label="Ходы решения" hidden></ol>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
